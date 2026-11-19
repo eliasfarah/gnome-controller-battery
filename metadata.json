@@ -1,0 +1,10 @@
+{
+  "uuid": "controller-battery@farah.local",
+  "name": "Controller Battery",
+  "description": "Beautiful individual battery indicators for connected game controllers.",
+  "shell-version": [
+    "51"
+  ],
+  "version": 1,
+  "url": "https://github.com/eliasfarah/gnome-controller-battery"
+}

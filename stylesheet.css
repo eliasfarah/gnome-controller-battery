@@ -1,0 +1,7 @@
+.controller-battery-indicator { padding-left: 8px; padding-right: 8px; }
+.controller-battery-list { spacing: 14px; }
+.controller-battery-device { spacing: 4px; }
+.controller-battery-controller { color: #f4f5f7; }
+.controller-battery-outline { border: 1px solid rgba(255,255,255,0.72); border-radius: 2px; padding: 1px; }
+.controller-battery-fill { border-radius: 1px; }
+.controller-battery-tip { background-color: rgba(255,255,255,0.72); border-radius: 1px 1px 0 0; }
