@@ -16,10 +16,17 @@ function value(proxy, property, fallback = null) {
     return proxy.get_cached_property(property)?.deep_unpack() ?? fallback;
 }
 
-function controllerKind(name) {
+function controllerKind(name, modalias = '') {
     const n = name.toLowerCase();
-    if (/dualsense|dualshock|playstation|ps[345] controller|sony.*controller/.test(n))
-        return 'playstation';
+    const sony = modalias.toLowerCase().match(/v054cp([0-9a-f]{4})/);
+    if (sony && ['05c4', '09cc', '0ba0'].includes(sony[1])) return 'dualshock';
+    if (sony && ['0ce6', '0df2'].includes(sony[1])) return 'dualsense';
+    if (/dual\s*shock|wireless controller.*ps4|playstation\s*4|ps4 controller/.test(n))
+        return 'dualshock';
+    if (/dualsense|dual\s*sense|playstation\s*5|ps5 controller/.test(n))
+        return 'dualsense';
+    if (/playstation|sony.*controller|ps[34] controller/.test(n))
+        return 'dualshock';
     if (/xbox|x-box|microsoft.*controller/.test(n))
         return 'xbox';
     if (/switch.*pro|pro controller|nintendo.*controller/.test(n))
@@ -46,6 +53,7 @@ export default class ControllerBattery extends Extension {
         this._devices = new Map();
         this._generation = 0;
         this._bluetooth = new Map();
+        this._bluetoothModels = new Map();
         this._bluezGeneration = 0;
         this._watchBluetooth();
         this._indicator = new PanelMenu.Button(0.0, 'Controller Battery', false);
@@ -74,7 +82,7 @@ export default class ControllerBattery extends Extension {
         this._bluezManagerSignal = bus.signal_subscribe('org.bluez', 'org.freedesktop.DBus.ObjectManager', null, '/', null,
             Gio.DBusSignalFlags.NONE, () => this._loadBluetooth());
         this._bluezWatch = Gio.bus_watch_name(Gio.BusType.SYSTEM, 'org.bluez', Gio.BusNameWatcherFlags.NONE,
-            () => this._loadBluetooth(), () => { this._bluezGeneration++; this._bluetooth.clear(); this._refreshDevices(); });
+            () => this._loadBluetooth(), () => { this._bluezGeneration++; this._bluetooth.clear(); this._bluetoothModels.clear(); this._refreshDevices(); });
     }
 
     _addressFromPath(path) {
@@ -90,13 +98,17 @@ export default class ControllerBattery extends Extension {
                 try {
                     const [objects] = bus.call_finish(result).deep_unpack();
                     const states = new Map();
+                    const models = new Map();
                     for (const [path, interfaces] of Object.entries(objects)) {
                         const device = interfaces['org.bluez.Device1'];
                         const address = this._addressFromPath(path);
-                        if (device && address && device.Connected)
+                        if (device && address && device.Connected) {
                             states.set(address, device.Connected.deep_unpack());
+                            if (device.Modalias) models.set(address, device.Modalias.deep_unpack());
+                        }
                     }
                     this._bluetooth = states;
+                    this._bluetoothModels = models;
                     this._refreshDevices();
                 } catch (e) { console.debug(`Controller Battery: Bluetooth: ${e.message}`); }
             });
@@ -168,7 +180,7 @@ export default class ControllerBattery extends Extension {
             this._box.add_child(entry.actor);
         }
         const name = value(proxy, 'Model', '') || value(proxy, 'NativePath', '') || 'Controle';
-        const kind = controllerKind(`${name} ${value(proxy, 'NativePath', '')}`);
+        const kind = controllerKind(`${name} ${value(proxy, 'NativePath', '')}`, this._bluetoothModels.get(serial) || '');
         entry.icon.gicon = new Gio.FileIcon({file: this.dir.get_child('icons').get_child(`${kind}.svg`)});
         const {label, amount} = batteryDescription(proxy);
         const state = value(proxy, 'State', 0);

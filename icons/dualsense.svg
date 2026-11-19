@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs>
+ <linearGradient id="shell" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#ffffff"/><stop offset=".55" stop-color="#e7ebef"/><stop offset="1" stop-color="#b8c2cc"/></linearGradient>
+ <linearGradient id="center" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#343d48"/><stop offset="1" stop-color="#111820"/></linearGradient>
+ <radialGradient id="stick"><stop stop-color="#58626d"/><stop offset=".73" stop-color="#26303a"/><stop offset="1" stop-color="#11171d"/></radialGradient>
+</defs>
+<!-- The DualSense has broad white shoulders and long, tapered grips. -->
+<path d="M23 43l-3-8 7-5 11 4M105 43l3-8-7-5-11 4" fill="#4a5561" stroke="#9aa7b4" stroke-width="2"/>
+<path d="M26 37c-8 2-14 10-18 26C4 78 1 96 5 105c2 6 8 7 13 4 6-3 11-11 17-19l8-10h42l8 10c6 8 11 16 17 19 5 3 11 2 13-4 4-9 1-27-3-42-4-16-10-24-18-26-9-3-16 1-23 3-9 3-21 3-30 0-7-2-14-6-23-3Z" fill="url(#shell)" stroke="#8e9aa7" stroke-width="1.7"/>
+<!-- Black central plate wraps around the symmetric sticks. -->
+<path d="M38 38c7 1 12 5 26 5s19-4 26-5l-3 17c-1 5-2 8-6 11l-6 5 10 10-7 7H50l-7-7 10-10-6-5c-4-3-5-6-6-11Z" fill="url(#center)"/>
+<path d="M43 39c7 2 12 4 21 4s14-2 21-4l-2 14c-.5 4-3 6-7 6H52c-4 0-6.5-2-7-6Z" fill="#303a46" stroke="#83d4fa" stroke-width="1.4"/>
+<path d="M29 46h5v6h6v5h-6v6h-5v-6h-6v-5h6Z" fill="#aab6c0" stroke="#e8edf0" stroke-width=".6"/>
+<g fill="#edf1f3" stroke="#a5b0bb" stroke-width=".8"><circle cx="96" cy="46.5" r="4.3"/><circle cx="103.5" cy="54" r="4.3"/><circle cx="88.5" cy="54" r="4.3"/><circle cx="96" cy="61.5" r="4.3"/></g>
+<g fill="none" stroke="#8d9ba8" stroke-width=".9"><path d="m96 44.5-2 3.5h4z"/><circle cx="103.5" cy="54" r="1.8"/><path d="m87 52.5 3 3m0-3-3 3"/><path d="M94.4 60h3.2v3.2h-3.2z"/></g>
+<g fill="#111820" stroke="#77838e" stroke-width=".8"><circle cx="48" cy="75" r="10.5"/><circle cx="80" cy="75" r="10.5"/></g><g fill="url(#stick)" stroke="#5a6671" stroke-width=".7"><circle cx="48" cy="75" r="7.7"/><circle cx="80" cy="75" r="7.7"/></g>
+<circle cx="64" cy="65" r="2" fill="#b2bec8"/><path d="M59 72h10m-8 3h6" stroke="#75828d" stroke-width=".8" stroke-linecap="round"/>
+</svg>

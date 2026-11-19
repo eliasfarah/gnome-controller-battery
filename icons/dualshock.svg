@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs>
+ <linearGradient id="body" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#626d78"/><stop offset=".2" stop-color="#434d58"/><stop offset=".7" stop-color="#303943"/><stop offset="1" stop-color="#1f2730"/></linearGradient>
+ <linearGradient id="touch" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#555f6b"/><stop offset="1" stop-color="#323b45"/></linearGradient>
+ <radialGradient id="stick"><stop stop-color="#68737d"/><stop offset=".7" stop-color="#38424c"/><stop offset="1" stop-color="#171d24"/></radialGradient>
+</defs>
+<!-- DualShock 4: darker shell, shorter grips and a wide rectangular touchpad. -->
+<path d="m25 40-3-7q0-3 5-4l12 4m64 7 3-7q0-3-5-4l-12 4" fill="#202830" stroke="#83909a" stroke-width="1.5"/>
+<path d="M26 38c-9 2-15 12-19 27C3 80 2 96 6 103c3 6 9 6 15 2 5-4 9-10 15-18l6-7h44l6 7c6 8 10 14 15 18 6 4 12 4 15-2 4-7 3-23-1-38-4-15-10-25-19-27-7-2-14 0-20 1H46c-6-1-13-3-20-1Z" fill="url(#body)" stroke="#a1adb7" stroke-width="1.5"/>
+<path d="M44 38h40l-2 19c-.3 2-2 3-4 3H50c-2 0-3.7-1-4-3Z" fill="url(#touch)" stroke="#a1aeb8" stroke-width="1"/><path d="M47 40h34" stroke="#8bd7fb" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M29 46h5v6h6v5h-6v6h-5v-6h-6v-5h6Z" fill="#a9b4bd" stroke="#1b222a" stroke-width=".7"/>
+<g fill="#202932" stroke="#a1aeb8" stroke-width=".8"><circle cx="96" cy="46.5" r="4.5"/><circle cx="103.5" cy="54" r="4.5"/><circle cx="88.5" cy="54" r="4.5"/><circle cx="96" cy="61.5" r="4.5"/></g>
+<g fill="none" stroke-width="1.2"><path d="m96 44-2.2 3.5h4.4z" stroke="#85c8af"/><circle cx="103.5" cy="54" r="1.9" stroke="#ed9ea7"/><path d="m87 52.5 3 3m0-3-3 3" stroke="#9aafde"/><path d="M94.4 60h3.2v3.2h-3.2z" stroke="#dca3cf"/></g>
+<g fill="#1a222a" stroke="#a4afb7" stroke-width=".8"><circle cx="48" cy="75" r="10.5"/><circle cx="80" cy="75" r="10.5"/></g><g fill="url(#stick)" stroke="#78848d" stroke-width=".8"><circle cx="48" cy="75" r="7.8"/><circle cx="80" cy="75" r="7.8"/></g>
+<circle cx="64" cy="68" r="3" fill="#202a32" stroke="#9aa8b1" stroke-width=".7"/><path d="M59 62h10" stroke="#a0abb3" stroke-width="1"/>
+</svg>
