@@ -52,6 +52,17 @@ export default class ControllerBattery extends Extension {
     enable() {
         this._devices = new Map();
         this._generation = 0;
+        this._poll = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
+            for (const [path, entry] of this._devices) {
+                if (!entry.actor) continue;
+                const status = this._driverCharging(entry.proxy);
+                if (status !== entry.driverCharging) {
+                    entry.driverCharging = status;
+                    this._update(path);
+                }
+            }
+            return GLib.SOURCE_CONTINUE;
+        });
         this._bluetooth = new Map();
         this._bluetoothModels = new Map();
         this._bluezGeneration = 0;
@@ -149,6 +160,20 @@ export default class ControllerBattery extends Extension {
         } catch (e) { console.error(`Controller Battery: ${e.message}`); }
     }
 
+    _driverCharging(proxy) {
+        const native = value(proxy, 'NativePath', '');
+        if (!native || native !== GLib.path_get_basename(native) || native === '.' || native === '..')
+            return null;
+        try {
+            const [ok, bytes] = GLib.file_get_contents(`/sys/class/power_supply/${native}/status`);
+            if (!ok) return null;
+            const status = new TextDecoder().decode(bytes).trim().toLowerCase();
+            if (status === 'charging') return true;
+            if (['discharging', 'not charging', 'full'].includes(status)) return false;
+        } catch (_) { /* Some devices do not expose a power_supply status. */ }
+        return null;
+    }
+
     _update(path) {
         const entry = this._devices.get(path);
         if (!entry) return;
@@ -175,6 +200,8 @@ export default class ControllerBattery extends Extension {
             entry.batteryGroup.add_child(entry.battery);
             entry.actor.add_child(entry.icon);
             entry.actor.add_child(entry.batteryGroup);
+            entry.chargeIcon = new St.Icon({gicon: new Gio.FileIcon({file: this.dir.get_child('icons').get_child('charging.svg')}), icon_size: 12, x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER});
+            entry.battery.add_child(entry.chargeIcon);
             entry.menuItem = new PopupMenu.PopupMenuItem('', {reactive: false});
             this._indicator.menu.addMenuItem(entry.menuItem);
             this._box.add_child(entry.actor);
@@ -184,7 +211,9 @@ export default class ControllerBattery extends Extension {
         entry.icon.gicon = new Gio.FileIcon({file: this.dir.get_child('icons').get_child(`${kind}.svg`)});
         const {label, amount} = batteryDescription(proxy);
         const state = value(proxy, 'State', 0);
-        const charging = state === 1 || state === 5;
+        entry.driverCharging = this._driverCharging(proxy);
+        const charging = entry.driverCharging ?? (state === 1 || state === 5);
+        entry.chargeIcon.visible = charging;
         const isLow = amount !== null && amount <= 20;
         if (isLow && !entry.lowNotified && !charging) {
             Main.notify('Bateria baixa', `${name}: ${label}`);
@@ -194,9 +223,10 @@ export default class ControllerBattery extends Extension {
         }
         const color = amount === null ? 'unknown' : isLow ? 'low' : amount <= 50 ? 'medium' : 'high';
         const colors = {high: '#6ee7a0', medium: '#f6cf65', low: '#ff727b', unknown: 'transparent'};
-        entry.fill.set_style(`background-color: ${colors[color]};`);
+        entry.fill.set_style(`background-color: ${charging ? '#62b5ff' : colors[color]};`);
         entry.fill.set_size(5, amount === null ? 0 : Math.max(1, Math.round(10 * amount / 100)));
-        entry.menuItem.label.text = `${name}  •  ${label}${charging ? '  •  Carregando' : ''}`;
+        const suffix = /^[0-9A-F]{2}(?::[0-9A-F]{2}){5}$/.test(serial) ? ` (${serial.slice(-5)})` : '';
+        entry.menuItem.label.text = `${name}${suffix}  •  ${label}${charging ? '  •  Carregando' : ''}`;
         entry.actor.accessible_name = `${name}, bateria ${label}${charging ? ', carregando' : ''}`;
         this._visibility();
     }
@@ -219,6 +249,7 @@ export default class ControllerBattery extends Extension {
         this._root = null;
     }
     disable() {
+        GLib.source_remove(this._poll);
         Gio.bus_unwatch_name(this._watch);
         Gio.bus_unwatch_name(this._bluezWatch);
         Gio.DBus.system.signal_unsubscribe(this._bluezSignal);

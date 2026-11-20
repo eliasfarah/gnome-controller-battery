@@ -2,7 +2,7 @@
 
 A GNOME Shell extension that shows a separate, compact battery indicator for each connected controller. It has separate icons for DualSense and DualShock, and recognizes Xbox and Nintendo Switch Pro controllers and uses a generic icon for other gamepads. The indicator is hidden when no supported controller is available.
 
-The vertical battery indicator is green above 50%, yellow from 21% to 50%, and red at 20% or below. Click the indicator to see each device's battery level. A short notification warns when a controller's battery is low. Bluetooth connection status is used to hide disconnected devices promptly; other connections rely on UPower.
+While charging, the battery turns blue and shows a lightning bolt. Otherwise, the vertical battery indicator is green above 50%, yellow from 21% to 50%, and red at 20% or below. Click the indicator to see each device's battery level. A short notification warns when a controller's battery is low. Bluetooth connection status is used to hide disconnected devices promptly; other connections rely on UPower.
 
 ## Requirements
 
