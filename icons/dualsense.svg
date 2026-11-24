@@ -1,18 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
 <defs>
- <linearGradient id="shell" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#ffffff"/><stop offset=".55" stop-color="#e7ebef"/><stop offset="1" stop-color="#b8c2cc"/></linearGradient>
- <linearGradient id="center" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#343d48"/><stop offset="1" stop-color="#111820"/></linearGradient>
- <radialGradient id="stick"><stop stop-color="#58626d"/><stop offset=".73" stop-color="#26303a"/><stop offset="1" stop-color="#11171d"/></radialGradient>
+ <linearGradient id="shell" x1=".12" y1="0" x2=".78" y2="1"><stop stop-color="#fff"/><stop offset=".38" stop-color="#edf0f5"/><stop offset=".78" stop-color="#d9dde6"/><stop offset="1" stop-color="#aeb8c5"/></linearGradient>
+ <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#434b58"/><stop offset=".32" stop-color="#252c37"/><stop offset="1" stop-color="#11151c"/></linearGradient>
+ <linearGradient id="pad" x1=".15" y1="0" x2=".8" y2="1"><stop stop-color="#fff"/><stop offset=".6" stop-color="#eff1f6"/><stop offset="1" stop-color="#cdd3df"/></linearGradient>
+ <radialGradient id="stick"><stop stop-color="#343c48"/><stop offset=".72" stop-color="#1e252e"/><stop offset=".85" stop-color="#4c5662"/><stop offset="1" stop-color="#0d1219"/></radialGradient>
+ <radialGradient id="button"><stop stop-color="#f9fbff"/><stop offset=".7" stop-color="#e6eaf1"/><stop offset="1" stop-color="#bec7d2"/></radialGradient>
 </defs>
-<!-- The DualSense has broad white shoulders and long, tapered grips. -->
-<path d="M23 43l-3-8 7-5 11 4M105 43l3-8-7-5-11 4" fill="#4a5561" stroke="#9aa7b4" stroke-width="2"/>
-<path d="M26 37c-8 2-14 10-18 26C4 78 1 96 5 105c2 6 8 7 13 4 6-3 11-11 17-19l8-10h42l8 10c6 8 11 16 17 19 5 3 11 2 13-4 4-9 1-27-3-42-4-16-10-24-18-26-9-3-16 1-23 3-9 3-21 3-30 0-7-2-14-6-23-3Z" fill="url(#shell)" stroke="#8e9aa7" stroke-width="1.7"/>
-<!-- Black central plate wraps around the symmetric sticks. -->
-<path d="M38 38c7 1 12 5 26 5s19-4 26-5l-3 17c-1 5-2 8-6 11l-6 5 10 10-7 7H50l-7-7 10-10-6-5c-4-3-5-6-6-11Z" fill="url(#center)"/>
-<path d="M43 39c7 2 12 4 21 4s14-2 21-4l-2 14c-.5 4-3 6-7 6H52c-4 0-6.5-2-7-6Z" fill="#303a46" stroke="#83d4fa" stroke-width="1.4"/>
-<path d="M29 46h5v6h6v5h-6v6h-5v-6h-6v-5h6Z" fill="#aab6c0" stroke="#e8edf0" stroke-width=".6"/>
-<g fill="#edf1f3" stroke="#a5b0bb" stroke-width=".8"><circle cx="96" cy="46.5" r="4.3"/><circle cx="103.5" cy="54" r="4.3"/><circle cx="88.5" cy="54" r="4.3"/><circle cx="96" cy="61.5" r="4.3"/></g>
-<g fill="none" stroke="#8d9ba8" stroke-width=".9"><path d="m96 44.5-2 3.5h4z"/><circle cx="103.5" cy="54" r="1.8"/><path d="m87 52.5 3 3m0-3-3 3"/><path d="M94.4 60h3.2v3.2h-3.2z"/></g>
-<g fill="#111820" stroke="#77838e" stroke-width=".8"><circle cx="48" cy="75" r="10.5"/><circle cx="80" cy="75" r="10.5"/></g><g fill="url(#stick)" stroke="#5a6671" stroke-width=".7"><circle cx="48" cy="75" r="7.7"/><circle cx="80" cy="75" r="7.7"/></g>
-<circle cx="64" cy="65" r="2" fill="#b2bec8"/><path d="M59 72h10m-8 3h6" stroke="#75828d" stroke-width=".8" stroke-linecap="round"/>
+<!-- Rear shoulder buttons -->
+<path d="M17 31c2-4 8-6 15-5l4 1 1 7-21 4Zm74 3 1-7 4-1c7-1 13 1 15 5l1 7Z" fill="#202630" stroke="#090c11" stroke-width="1.2"/>
+<path d="M19 32c5-3 10-3 15-3m60 0c5 0 10 0 15 3" fill="none" stroke="#798290" opacity=".5"/>
+<!-- White shell and inset black center -->
+<path d="M20 33c5-2 10-3 16-2 5-2 14-3 28-3s23 1 28 3c6-1 11 0 16 2 7 11 12 25 14 39 2 12 2 25-1 33-2 6-6 9-10 9-5 0-8-4-11-11L88 79c-2-4-5-6-9-6H49c-4 0-7 2-9 6l-12 24c-3 7-6 11-11 11-4 0-8-3-10-9-3-8-3-21-1-33 2-14 7-28 14-39Z" fill="url(#shell)" stroke="#98a4b4" stroke-width="1"/>
+<path d="M36 32c2 4 4 11 6 17 1 5 0 9-3 13-4 5-7 10-10 16l-14 34c2 2 5 3 8 2 3-1 5-4 7-9l12-25c2-4 5-6 9-6h26c4 0 7 2 9 6l12 25c2 5 4 8 7 9 3 1 6 0 8-2L99 78c-3-6-6-11-10-16-3-4-4-8-3-13 2-6 4-13 6-17-8-3-16-4-28-4s-20 1-28 4Z" fill="url(#plate)"/>
+<!-- Light bars border the pale touch surface. -->
+<path d="M38 33c2 4 3 10 5 17 1 4 4 7 9 7h24c5 0 8-3 9-7 2-7 3-13 5-17" fill="none" stroke="#238bff" stroke-width="2.5"/>
+<path d="M39 32c5-3 14-4 25-4s20 1 25 4l-4 18c-.8 4-4 6-9 6H52c-5 0-8.2-2-9-6Z" fill="url(#pad)" stroke="#9ba8ba" stroke-width=".7"/>
+<path d="M42 32c6-2 14-3 22-3s16 1 22 3" fill="none" stroke="#fff" opacity=".8"/>
+<!-- Translucent separate directional buttons -->
+<g fill="url(#button)" stroke="#a6b0be" stroke-width=".8"><path d="M28 41q0-2 2-2h3q2 0 2 2v4l-3.5 3-3.5-3Z"/><path d="M28 57q0 2 2 2h3q2 0 2-2v-4l-3.5-3-3.5 3Z"/><path d="M23 46q-2 0-2 2v3q0 2 2 2h4l3-3.5-3-3.5Z"/><path d="M40 46q2 0 2 2v3q0 2-2 2h-4l-3-3.5 3-3.5Z"/></g>
+<!-- Face buttons with the neutral grey symbols on the white model. -->
+<g fill="url(#button)" stroke="#9ca8b7" stroke-width=".7"><circle cx="97" cy="41" r="4.1"/><circle cx="105" cy="49" r="4.1"/><circle cx="89" cy="49" r="4.1"/><circle cx="97" cy="57" r="4.1"/></g>
+<g fill="none" stroke="#929eab" stroke-width=".9"><path d="m97 38.7-2 3.4h4Z"/><circle cx="105" cy="49" r="1.9"/><path d="M87.3 47.3h3.4v3.4h-3.4zM95.3 55.3l3.4 3.4m0-3.4-3.4 3.4"/></g>
+<!-- Symmetric thumbsticks, with recessed wells and raised rims. -->
+<g fill="#11161d" stroke="#626d7b" stroke-width=".7"><circle cx="48" cy="68" r="8.7"/><circle cx="80" cy="68" r="8.7"/></g>
+<g fill="url(#stick)" stroke="#151b22" stroke-width=".7"><circle cx="48" cy="68" r="7.3"/><circle cx="80" cy="68" r="7.3"/></g>
+<g fill="#0b1016" opacity=".8"><circle cx="60" cy="59" r=".65"/><circle cx="62.7" cy="59" r=".65"/><circle cx="65.3" cy="59" r=".65"/><circle cx="68" cy="59" r=".65"/><circle cx="61.3" cy="61" r=".65"/><circle cx="64" cy="61" r=".65"/><circle cx="66.7" cy="61" r=".65"/></g>
+<circle cx="64" cy="66" r="2.2" fill="#131921" stroke="#657181" stroke-width=".55"/><rect x="61" y="71" width="6" height="1.5" rx=".75" fill="#9ca8b3"/>
+<g fill="#eff2f6" stroke="#acb7c3" stroke-width=".6"><rect x="37" y="34" width="2.5" height="5" rx="1.2" transform="rotate(-12 38 36)"/><rect x="89" y="34" width="2.5" height="5" rx="1.2" transform="rotate(12 90 36)"/></g>
 </svg>

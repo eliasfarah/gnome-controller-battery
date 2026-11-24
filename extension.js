@@ -214,11 +214,12 @@ export default class ControllerBattery extends Extension {
         entry.driverCharging = this._driverCharging(proxy);
         const charging = entry.driverCharging ?? (state === 1 || state === 5);
         entry.chargeIcon.visible = charging;
-        const isLow = amount !== null && amount <= 20;
-        if (isLow && !entry.lowNotified && !charging) {
+        const isLow = amount !== null && amount <= 25;
+        const shouldWarn = isLow;
+        if (shouldWarn && !entry.lowNotified && !charging) {
             Main.notify('Bateria baixa', `${name}: ${label}`);
             entry.lowNotified = true;
-        } else if (!isLow && amount !== null) {
+        } else if (!shouldWarn && amount !== null) {
             entry.lowNotified = false;
         }
         const color = amount === null ? 'unknown' : isLow ? 'low' : amount <= 50 ? 'medium' : 'high';
